@@ -1,0 +1,125 @@
+@import "global.css";
+
+.containerMain {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.title-bar {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Grouping left and right items */
+.title-bar .left,
+.title-bar .right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Optional spacing between items */
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item:nth-child(1) i.fa-person {
+    font-size: 40px;
+    margin-left: 40px;
+}
+
+/* Space between icon and logo text */
+.logo-name {
+    margin-left: 8px;
+    font-weight: bold;
+    font-size: 32px;
+    background-image: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px transparent;
+}
+
+/* Search bar styling */
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin-right: 10px;
+}
+
+.search-bar input.search-input {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    font-size: 16px;
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    color: #373737; /* Make text visible on glass */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    outline: none;
+
+}
+
+
+.search-bar i.fa-magnifying-glass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+
+/* Theme toggle button */
+.theme-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    margin-right: 40px;
+
+    background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.theme-button:hover {
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.47);
+}
+
+.theme-button i.fa-moon {
+    font-size: 20px;
+    color: #fff;
+}
