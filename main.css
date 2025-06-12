@@ -40,10 +40,7 @@
     justify-content: center;
 }
 
-.item:nth-child(1) i.fa-person {
-    font-size: 40px;
-    margin-left: 40px;
-}
+
 
 /* Space between icon and logo text */
 .logo-name {
@@ -80,17 +77,17 @@
     color: #373737; /* Make text visible on glass */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     outline: none;
-
 }
 
-
-.search-bar i.fa-magnifying-glass {
+.search-bar svg {
+    height: 20px;
+    width: 20px;
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #666;
     pointer-events: none;
+    object-fit: contain; /* ensures proper scaling */
 }
 
 /* Theme toggle button */
@@ -105,7 +102,7 @@
     cursor: pointer;
     margin-right: 40px;
 
-    background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+    background: rgba(39, 39, 39, 0.4); /* semi-transparent black */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
@@ -115,11 +112,155 @@
 }
 
 .theme-button:hover {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(35, 35, 35, 0.6);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.47);
 }
 
-.theme-button i.fa-moon {
-    font-size: 20px;
+.theme-button img {
+    height: 32px;
+    width: 32px;
+}
+
+.row:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+}
+
+.collapse-expand {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.collapse-expand svg {
+    height: 32px;
+    width: 32px;
+    color: #CA7842;
+    transition: transform 0.3s ease;
+}
+
+.collapse-expand:hover svg {
+    transform: scale(1.1);
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
     color: #fff;
+    padding: 20px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: blur(0px);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: none;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar-item .items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.sidebar-item .items:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.sidebar-item svg {
+    height: 32px;
+    width: 32px;
+    color: #CA7842;
+    flex-shrink: 0;
+}
+
+.item-name {
+    padding-left: 10px;
+    color: #8aa17a;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .item-name {
+    opacity: 0;
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.sidebar.collapsed .items {
+    justify-content: center;
+    gap: 0;
+}
+
+/* Hide chevron icons by default */
+.lucide-chevron-left, .lucide-chevron-right {
+    display: none;
+}
+
+/* Show appropriate chevron based on sidebar state */
+.sidebar:not(.collapsed) .lucide-chevron-left {
+    display: block;
+}
+
+.sidebar.collapsed .lucide-chevron-right {
+    display: block;
+}
+
+.lucide-menu {
+    display: none;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Tooltip for collapsed state */
+.sidebar.collapsed .items {
+    position: relative;
+}
+
+.sidebar.collapsed .items::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    margin-left: 10px;
+    z-index: 1000;
+}
+
+.sidebar.collapsed .items:hover::after {
+    opacity: 1;
 }
