@@ -1,29 +1,28 @@
 :root {
-    /*default colors*/
-    --primary-color: #000;
-    --secondary-color: #fff;
-    --primary-font-color: #000;
-    --secondary-font-color: #fff;
-    --primary-background-color: #F5F5F5;
-    --secondary-background-color:#1A1A1D;
-    /*default font*/
-    --primary-font-family: 'Roboto', sans-serif;
-    --font-size-large: 1.25rem;
-    --font-size-medium: 1rem;
-    --font-size-small: 0.875rem;
-
+  /*default colors*/
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --primary-font-color: #000;
+  --secondary-font-color: #fff;
+  --primary-background-color: #f5f5f5;
+  --secondary-background-color: #1a1a1d;
+  /*default font*/
+  --primary-font-family: "Roboto", sans-serif;
+  --font-size-large: 1.25rem;
+  --font-size-medium: 1rem;
+  --font-size-small: 0.875rem;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--primary-background-color);
-    font-family: var(--primary-font-family), serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-background-color);
+  font-family: var(--primary-font-family), serif;
 }
 
 .roboto {
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
