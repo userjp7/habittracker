@@ -1,58 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
+  <head>
+    <meta charset="UTF-8" />
     <title>HabitTracker</title>
-    <link rel="stylesheet" href="main.css"/>
-    <link rel="stylesheet" href="global.css"/>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
-</head>
-<body>
-<div class="containerMain" id="containerMain">
-    <div class="row">
-        <div class="title-bar">
-            <!-- Left side -->
-            <div class="left">
-                <div class="item">
-                    <i class="fa-solid fa-person"></i>
-                    <div class="logo-name">HabitTracker</div>
-                </div>
-                <div class="item"></div>
+  </head>
+  <body>
+    <!--main container-->
+    <div class="containerMain" id="containerMain">
+      <div class="row">
+        <!--title bar-->
+        <div class="title-bar" id="title-bar">
+          <!-- Left side -->
+          <div class="left">
+            <div class="item">
+              <div class="logo-name">HabitTracker</div>
             </div>
+            <!--document name displayer-->
+            <div class="item" id="titleDisplay"></div>
+          </div>
 
-            <!-- Right side -->
-            <div class="right">
-                <div class="item">
-                    <div class="search-bar">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <label>
-                            <input
-                                    type="text"
-                                    class="search-input"
-                                    placeholder="Search..."
-                            />
-                        </label>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="theme-button">
-                        <i class="fa-solid fa-moon"></i>
-                    </div>
-                </div>
+          <!-- Right side -->
+          <div class="right">
+            <div class="item">
+              <!-- Search bar-->
+              <div class="search-bar" id="search-bar">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-search-icon lucide-search"
+                >
+                  <path d="m21 21-4.34-4.34" />
+                  <circle cx="11" cy="11" r="8" />
+                </svg>
+                <label>
+                  <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Search..."
+                    id="search-input"
+                  />
+                </label>
+              </div>
             </div>
+            <!--            theme button-->
+            <div class="item">
+              <div class="theme-button" id="theme-button">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="row">
+        <!--        collapse-able sidebar           -->
+        <div class="sidebar" id="sidebar">
+          <div class="collapse-expand" id="collapse-expand">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-left-icon lucide-chevron-left"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-right-icon lucide-chevron-right"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </div>
+          <div class="sidebar-item">
+            <!--OverView Button-->
+            <div class="items" id="Overview">
+              <button id="overview-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"
+                >
+                  <rect width="7" height="9" x="3" y="3" rx="1" />
+                  <rect width="7" height="5" x="14" y="3" rx="1" />
+                  <rect width="7" height="9" x="14" y="12" rx="1" />
+                  <rect width="7" height="5" x="3" y="16" rx="1" />
+                </svg>
+              </button>
+              <div class="item-name">OverView</div>
+            </div>
+            <!--Notes Button-->
+            <div class="items" id="Notes">
+              <button id="notes-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-notebook-text-icon lucide-notebook-text"
+                >
+                  <path d="M2 6h4" />
+                  <path d="M2 10h4" />
+                  <path d="M2 14h4" />
+                  <path d="M2 18h4" />
+                  <rect width="16" height="20" x="4" y="2" rx="2" />
+                  <path d="M9.5 8h5" />
+                  <path d="M9.5 12H16" />
+                  <path d="M9.5 16H14" />
+                </svg>
+              </button>
+              <div class="item-name">Notes</div>
+            </div>
+            <!--T odo Button-->
+            <div class="items" id="Todo">
+              <button id="todo-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-clipboard-check-icon lucide-clipboard-check"
+                >
+                  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                  <path
+                    d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                  />
+                  <path d="m9 14 2 2 4-4" />
+                </svg>
+              </button>
+              <div class="item-name">Todo</div>
+            </div>
+            <!--History Button-->
+            <div class="items" id="History">
+              <button id="history-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-history-icon lucide-history"
+                >
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                  <path d="M3 3v5h5" />
+                  <path d="M12 7v5l4 2" />
+                </svg>
+              </button>
+              <div class="item-name">History</div>
+            </div>
+            <!--Settings Button-->
+            <div class="items" id="Settings">
+              <button id="settings-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-settings-icon lucide-settings"
+                >
+                  <path
+                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+                  />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+              <div class="item-name">Settings</div>
+            </div>
+          </div>
+        </div>
+        <!--        OutPut window-->
+        <div class="main-content" id="main-content">
+          <h1>Welcome to HabitTracker</h1>
+          <p>
+            Your main content goes here. The sidebar can be collapsed to show
+            only icons or expanded to show icons with labels.
+          </p>
+        </div>
+      </div>
+      <!--    Add Button-->
+      <div class="add-button">
+        <button id="add">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-circle-plus-icon lucide-circle-plus"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12h8" />
+            <path d="M12 8v8" />
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <div class="row">
-        <!-- Your app content goes here -->
-    </div>
-</div>
-</body>
+    <script src="ui.js"></script>
+  <script src="main.js"></script>
+  </body>
 </html>
