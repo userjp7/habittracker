@@ -1,28 +1,202 @@
 :root {
-  /*default colors*/
-  --primary-color: #000;
-  --secondary-color: #fff;
-  --primary-font-color: #000;
-  --secondary-font-color: #fff;
-  --primary-background-color: #f5f5f5;
-  --secondary-background-color: #1a1a1d;
-  /*default font*/
-  --primary-font-family: "Roboto", sans-serif;
-  --font-size-large: 1.25rem;
-  --font-size-medium: 1rem;
-  --font-size-small: 0.875rem;
+  /* Font Families */
+  --font-family-primary: "Lato", sans-serif;
+  --font-family-heading: "Open Sans", sans-serif;
+  --font-family-accent: "Nunito", sans-serif;
+
+  /* Font Sizes */
+  --font-size-primary: 18px;
+  --font-size-large: 34px;
+  --font-size-medium: 22px;
+  --font-size-small: 14px;
+  --font-size-xsmall: 12px;
+
+  /* Paddings */
+  --padding-xsmall: 2px;
+  --padding-small: 4px;
+  --padding-medium: 6px;
+  --padding-large: 8px;
+  --padding-xlarge: 12px;
+  --padding-xxlarge: 16px;
+
+  /* Margin */
+  --margin-xsmall: 2px;
+  --margin-small: 4px;
+  --margin-medium: 6px;
+  --margin-large: 8px;
+  --margin-xlarge: 12px;
+  --margin-xxlarge: 16px;
+
+  /* --- Base/Default Color Palette (Fallbacks / Neutral) --- */
+  --color-text-default: hsl(0, 0%, 20%); /* A default dark gray */
+  --color-text-secondary: hsl(0, 0%, 40%); /* A default medium gray */
+  --color-bg-default: hsl(0, 0%, 97%); /* A default light background */
+  --color-bg-secondary: hsl(
+          0,
+          0%,
+          93%
+  ); /* A slightly darker default background */
+  --color-border-default: hsl(0, 0%, 87%); /* A default border color */
+  --color-button-bg-default: hsl(
+          210,
+          100%,
+          37%
+  ); /* A default accent blue for buttons */
+  --color-button-text-default: hsl(
+          0,
+          0%,
+          100%
+  ); /* Default white text for primary buttons */
+
+  /* --- Fixed/Utility Colors --- */
+  --color-accent: hsl(210, 100%, 37%); /* #007bff - Your primary accent color */
+  --color-success: hsl(134, 61%, 41%); /* #28a745 */
+  --color-error: hsl(354, 70%, 54%); /* #dc3545 */
+}
+
+/* --- LIGHT THEME --- */
+.light-theme {
+  --color-text-default: hsl(0, 0%, 20%); /* Dark text */
+  --color-text-secondary: hsl(0, 0%, 40%); /* Medium dark text */
+  --color-bg-default: hsl(0, 0%, 100%); /* White background */
+  --color-bg-secondary: hsl(0, 0%, 95%); /* Light gray for alt backgrounds */
+  --color-border-default: hsl(0, 0%, 87%); /* Light border */
+  --color-button-bg-default: var(--color-accent); /* Primary button color */
+  --color-button-text-default: hsl(0, 0%, 100%); /* White button text */
+}
+
+/* --- DARK THEME --- */
+.dark-theme {
+  --color-text-default: hsl(0, 0%, 90%); /* Light text */
+  --color-text-secondary: hsl(0, 0%, 70%); /* Medium light text */
+  --color-bg-default: hsl(240, 5%, 15%); /* Dark background */
+  --color-bg-secondary: hsl(
+          240,
+          5%,
+          20%
+  ); /* Slightly lighter dark background */
+  --color-border-default: hsl(240, 5%, 30%); /* Darker border */
+  --color-button-bg-default: var(--color-accent); /* Primary button color */
+  --color-button-text-default: hsl(0, 0%, 100%); /* White button text */
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--primary-background-color);
-  font-family: var(--primary-font-family), serif;
+  font-family: var(--font-family-primary), serif;
+  font-size: var(--font-size-primary);
+  color: var(--color-text-default);
+  background-color: var(--color-bg-default);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.roboto {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading), serif;
+  color: var(--color-text-default);
+}
+p {
+  font-family: var(--font-family-accent), serif;
+  color: var(--color-text-default);
+}
+
+button {
+  font-family: var(--font-family-accent), serif;
+  background-color: var(--color-button-bg-default);
+  color: var(--color-button-text-default);
+  padding: var(--padding-medium) var(--padding-xlarge);
+  border: none;
+  border-radius: var(--padding-small);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.primary-action {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+button.secondary-action {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-default);
+  border: 1px solid var(--color-border-default);
+}
+
+/* interaction effects */
+.interactive-ui {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover */
+.interactive-ui:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-accent);
+}
+
+/* Active Click */
+.interactive-ui:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Ripple effect */
+.interactive-ui::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.interactive-ui:active::before {
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+}
+
+/* Light theme variants */
+.light-theme .interactive-ui {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #e9ecef;
+  color: var(--color-text-default);
+}
+.light-theme .interactive-ui:hover {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.2);
+}
+
+/* Dark theme variants */
+.dark-theme .interactive-ui {
+  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  border: 2px solid #6b7280;
+  color: var(--color-text-default);
+}
+.dark-theme .interactive-ui:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3);
+}
+/* icon animation on hover */
+.material-symbols-outlined.icon-hover-rotate {
+  transition: transform 0.3s ease;
+}
+
+.interactive-ui:hover .icon-hover-rotate {
+  transform: rotate(15deg);
 }
