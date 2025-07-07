@@ -21,13 +21,16 @@ function stateManagement() {
     renderLanding();
   }
 }
-// app state
+
+// ----- app state updater
 function setAppState(updates) {
   Object.assign(appState, updates);
   localStorage.setItem("appState", JSON.stringify(appState));
 }
+
 // -----login state
 function renderLogin() {}
+
 // -----landing page state
 function renderLanding() {
   render.innerHTML = `
@@ -54,8 +57,125 @@ function renderLanding() {
     renderCreateAccount();
   });
 }
+
 // -----create account state
-function renderCreateAccount() {}
+function renderCreateAccount() {
+  render.innerHTML = `
+  <div class="create-account-section">
+      <p>Create Your Account</p>
+      <p>start a new journey</p>
+      <form class="create-account-form">
+        <label for="first-name">First Name</label>
+        <input
+          class="interactive-ui"
+          id="first-name"
+          name="first-name"
+          placeholder="Jyotiprakash"
+          type="text"
+          autocomplete="given-name"
+          required
+        />
+
+        <label for="last-name">Last Name</label>
+        <input
+          class="interactive-ui"
+          id="last-name"
+          name="last-name"
+          placeholder="Mahto"
+          type="text"
+          autocomplete="family-name"
+          required
+        />
+
+        <label for="date-of-birth">Date of birth</label>
+        <input class="interactive-ui" id="date-of-birth" type="date" required />
+
+        <fieldset class="gender-group">
+          <legend>Gender</legend>
+          <div class="gender-group-row">
+            <div class="gender-option">
+              <input
+                class="interactive-ui"
+                id="male"
+                name="gender"
+                value="male"
+                type="radio"
+                required
+              />
+              <label for="male">Male</label>
+            </div>
+            <div class="gender-option">
+              <input
+                class="interactive-ui"
+                id="female"
+                name="gender"
+                value="female"
+                type="radio"
+              />
+              <label for="female">Female</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <label for="password">Enter New Password</label>
+        <input
+          class="interactive-ui"
+          id="password"
+          placeholder="Enter Password"
+          type="password"
+          required
+        />
+
+        <label for="confirm-password">Confirm Password</label>
+        <input
+          class="interactive-ui"
+          id="confirm-password"
+          placeholder="Confirm Password"
+          type="password"
+          required
+        />
+        <span class="form-buttons">
+          <button
+            type="submit"
+            class="create-button interactive-ui"
+            id="create-button"
+          >
+            Create
+          </button>
+          <button
+            type="button"
+            class="back-button interactive-ui"
+            id="back-button"
+          >
+            Back
+          </button>
+        </span>
+      </form>
+    </div>
+`;
+  const firstname = document.getElementById("first-name");
+  const lastname = document.getElementById("last-name");
+  const dateofbirth = document.getElementById("date-of-birth");
+  const male = document.getElementById("male");
+  const female = document.getElementById("female");
+  const password = document.getElementById("password");
+  const confirmPassword = document.getElementById("confirm-password");
+  const createButton = document.getElementById("create-button");
+  const backButton = document.getElementById("back-button");
+
+  const regexFirstname = /^[a-zA-Z]+$/;
+  const regexLastname = /^[a-zA-Z]+$/;
+}
+// -----display pop-up messages
+function displayMessage(
+  message,
+  type = "info",
+  id,
+  duration = 3000,
+  position = "top"
+) {
+  const messageContainer = document.createElement("div");
+}
 // -----theme logic
 function changeTheme() {
   const changeTheme = document.getElementById("theme-button");
@@ -69,8 +189,8 @@ function changeTheme() {
 
   const updateThemeButton = (theme) => {
     changeTheme.setAttribute(
-        "aria-label",
-        `Switch to ${theme === "light-theme" ? "dark" : "light"} theme`
+      "aria-label",
+      `Switch to ${theme === "light-theme" ? "dark" : "light"} theme`
     );
   };
 
@@ -79,7 +199,7 @@ function changeTheme() {
     setTheme(storedTheme);
   } else {
     const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)"
     ).matches;
     const initialTheme = prefersDark ? "dark-theme" : "light-theme";
     setTheme(initialTheme);
@@ -87,18 +207,18 @@ function changeTheme() {
 
   changeTheme.addEventListener("click", () => {
     const newTheme = bodyElement.classList.contains("light-theme")
-        ? "dark-theme"
-        : "light-theme";
+      ? "dark-theme"
+      : "light-theme";
     setTheme(newTheme);
   });
 
   window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e) => {
-        if (!localStorage.getItem("theme")) {
-          setTheme(e.matches ? "dark-theme" : "light-theme");
-        }
-      });
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        setTheme(e.matches ? "dark-theme" : "light-theme");
+      }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
