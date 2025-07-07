@@ -173,6 +173,7 @@ function displayMessage(
   id,
   duration = 3000,
   position = "top"
+
 ) {
   const messageContainer = document.createElement("div");
 }
