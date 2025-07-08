@@ -1,3 +1,5 @@
+import {changeTheme} from './scripts/changeTheme.js'
+
 // global variables
 const user = JSON.parse(localStorage.getItem("user")) || {};
 const viewState = JSON.parse(localStorage.getItem("viewState")) || {};
@@ -8,7 +10,6 @@ const dashboard = JSON.parse(localStorage.getItem("dashboard")) || [];
 const appState = JSON.parse(localStorage.getItem("appState")) || {};
 
 //  -----dom elements for global access
-const bodyElement = document.body;
 const render = document.getElementById("render");
 
 // -----startup logic for initial rendering
@@ -163,64 +164,87 @@ function renderCreateAccount() {
   const createButton = document.getElementById("create-button");
   const backButton = document.getElementById("back-button");
 
-  const regexFirstname = /^[a-zA-Z]+$/;
-  const regexLastname = /^[a-zA-Z]+$/;
+  //   regex evaluation for first name.
+  firstname.addEventListener("input", () => {
+    const value = firstname.value.trim();
+    if (value === "") {
+      displayMessage("first name cannot be empty", "error", 3000, "bottom");
+    } else if (value.length < 3) {
+      displayMessage(
+        "first name must be at least 3 characters",
+        "error",
+        3000,
+        "bottom"
+      );
+    } else if (!/^[A-Za-z]+$/.test(value)) {
+      displayMessage(
+        "Only alphabets are allowed — no numbers, symbols, or spaces",
+        "error",
+        3000,
+        "bottom"
+      );
+    }
+  });
+  // regex evaluation for second name.
+  lastname.addEventListener("input", () => {
+    const value = lastname.value.trim();
+    if (value === "") {
+      displayMessage("first name cannot be empty", "error", 3000, "bottom");
+    } else if (value.length < 3) {
+      displayMessage(
+          "first name must be at least 3 characters",
+          "error",
+          3000,
+          "bottom"
+      );
+    } else if (!/^[A-Za-z]+$/.test(value)) {
+      displayMessage(
+          "Only alphabets are allowed — no numbers, symbols, or spaces",
+          "error",
+          3000,
+          "bottom"
+      );
+    }
+    
+  })
 }
+
 // -----display pop-up messages
 function displayMessage(
   message,
-  type = "info",
-  id,
-  duration = 3000,
-  position = "top"
-
+  type = "info", // Can be 'info', 'success', 'error', 'warning'
+  duration = 3000, // How long it stays visible in milliseconds
+  position = "top" // Can be "top" or "bottom"
 ) {
   const messageContainer = document.createElement("div");
-}
-// -----theme logic
-function changeTheme() {
-  const changeTheme = document.getElementById("theme-button");
+  // Add base class and type-specific class
+  messageContainer.className = `message-container ${type}`;
+  messageContainer.textContent = message;
 
-  const setTheme = (theme) => {
-    bodyElement.classList.remove("light-theme", "dark-theme");
-    bodyElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
-    updateThemeButton(theme);
-  };
+  // Basic positioning
+  messageContainer.style.position = "fixed";
+  messageContainer.style.left = "50%";
+  messageContainer.style.transform = "translateX(-50%)";
+  messageContainer.style.zIndex = "10000"; // Ensure it's on top of everything
 
-  const updateThemeButton = (theme) => {
-    changeTheme.setAttribute(
-      "aria-label",
-      `Switch to ${theme === "light-theme" ? "dark" : "light"} theme`
-    );
-  };
-
-  const storedTheme = localStorage.getItem("theme");
-  if (storedTheme) {
-    setTheme(storedTheme);
+  if (position === "top") {
+    messageContainer.style.top = "20px"; // Distance from top
+    messageContainer.style.bottom = "auto";
   } else {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    const initialTheme = prefersDark ? "dark-theme" : "light-theme";
-    setTheme(initialTheme);
+    messageContainer.style.bottom = "20px"; // Distance from bottom
+    messageContainer.style.top = "auto";
   }
 
-  changeTheme.addEventListener("click", () => {
-    const newTheme = bodyElement.classList.contains("light-theme")
-      ? "dark-theme"
-      : "light-theme";
-    setTheme(newTheme);
-  });
+  document.body.appendChild(messageContainer);
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) => {
-      if (!localStorage.getItem("theme")) {
-        setTheme(e.matches ? "dark-theme" : "light-theme");
-      }
-    });
+  // Remove the message after 'duration'
+  setTimeout(() => {
+    messageContainer.remove();
+  }, duration);
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   changeTheme();
