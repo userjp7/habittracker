@@ -1,6 +1,6 @@
+import {bodyElement} from "./domElements.js";
 
 // -----theme logic
-const bodyElement = document.body;
 export function changeTheme() {
     const changeTheme = document.getElementById("theme-button");
 

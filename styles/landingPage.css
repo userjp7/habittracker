@@ -1,0 +1,25 @@
+
+
+/* --- landing section body --- */
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 150px;
+}
+/* landing section main text content */
+.heading-main,
+.paragraph-main {
+    text-align: center;
+}
+/* create an account button */
+.start-button {
+    font-size: var(--font-size-medium);
+    height: 50px;
+    width: 180px;
+    border-radius: 28px !important;
+}
+.start-button:hover {
+    color: var(--color-success);
+}
