@@ -1,0 +1,72 @@
+
+.container-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+/* title bar */
+.title-bar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-small);
+}
+/* New wrapper for the right-aligned controls */
+.title-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--padding-medium); /* space between search and theme button */
+}
+/* logo */
+.title-logo {
+    font-size: var(--font-size-large);
+    font-weight: bold;
+    padding: var(--padding-small);
+}
+/* light dark theme button */
+.theme-button {
+    height: 50px;
+    width: 50px;
+}
+/* search bar */
+.title-search {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    width: 280px;
+    padding: var(--padding-small);
+    border-radius: 28px;
+    background-color: var(--color-text-default);
+}
+/* search-bar input */
+.search-text {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding-left: 15px;
+    color: var(--color-bg-secondary);
+    font-size: var(--font-size-small);
+    font-family: var(--font-family-primary), serif;
+    transition: ease-in 0.4s;
+    line-height: 40px;
+    width: 250px;
+}
+/* search-bar button */
+#search-button {
+    color: var(--color-text-default);
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-bg-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
