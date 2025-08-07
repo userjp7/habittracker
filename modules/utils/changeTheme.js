@@ -1,27 +1,35 @@
-import {bodyElement} from "./domElements.js";
+import { bodyElement } from "./domElements.js";
+import { setAppState, getAppState } from "./stateManagement.js";
 
-// -----theme logic
+// Theme logic using state management instead of direct localStorage
 export function changeTheme() {
-    const changeTheme = document.getElementById("theme-button");
+    const themeButton = document.getElementById("theme-button");
 
     const setTheme = (theme) => {
         bodyElement.classList.remove("light-theme", "dark-theme");
         bodyElement.classList.add(theme);
-        localStorage.setItem("theme", theme);
+
+        // Store theme in state management
+        setAppState({ currentTheme: theme });
         updateThemeButton(theme);
     };
 
     const updateThemeButton = (theme) => {
-        changeTheme.setAttribute(
-            "aria-label",
-            `Switch to ${theme === "light-theme" ? "dark" : "light"} theme`
-        );
+        if (themeButton) {
+            themeButton.setAttribute(
+                "aria-label",
+                `Switch to ${theme === "light-theme" ? "dark" : "light"} theme`
+            );
+        }
     };
 
-    const storedTheme = localStorage.getItem("theme");
+    // Get stored theme from state
+    const currentState = getAppState();
+    const storedTheme = currentState.currentTheme;
     if (storedTheme) {
         setTheme(storedTheme);
     } else {
+        // Check system preference
         const prefersDark = window.matchMedia(
             "(prefers-color-scheme: dark)"
         ).matches;
@@ -29,17 +37,23 @@ export function changeTheme() {
         setTheme(initialTheme);
     }
 
-    changeTheme.addEventListener("click", () => {
-        const newTheme = bodyElement.classList.contains("light-theme")
-            ? "dark-theme"
-            : "light-theme";
-        setTheme(newTheme);
-    });
+    // Add click event listener if button exists
+    if (themeButton) {
+        themeButton.addEventListener("click", () => {
+            const newTheme = bodyElement.classList.contains("light-theme")
+                ? "dark-theme"
+                : "light-theme";
+            setTheme(newTheme);
+        });
+    }
 
+    // Listen for system theme changes
     window
         .matchMedia("(prefers-color-scheme: dark)")
         .addEventListener("change", (e) => {
-            if (!localStorage.getItem("theme")) {
+            // Only auto-change if user hasn't manually set a theme
+            const currentState = getAppState();
+            if (!currentState.currentTheme) {
                 setTheme(e.matches ? "dark-theme" : "light-theme");
             }
         });
