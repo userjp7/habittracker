@@ -155,6 +155,11 @@
     border-radius: 12px !important;
     margin: var(--margin-small);
 }
+.create-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 
 .back-button:hover {
     color: var(--color-error) !important;
